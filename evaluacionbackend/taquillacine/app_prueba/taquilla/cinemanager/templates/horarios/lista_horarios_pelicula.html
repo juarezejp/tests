@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Horarios de Película - CineManager{% endblock %}
+
+{% block content %}
+<h1>Horarios de la Película {% if pelicula.titulo %}"{{ pelicula.titulo }}"{% endif %}</h1>
+
+<ul>
+    {% for horario in horarios %}
+        <li>
+            <strong>Fecha:</strong> {{ horario.hora_inicio|date:"d-m-Y" }}<br>
+            <strong>Hora:</strong> {{ horario.hora_inicio|time:"H:i" }}<br>
+            <strong>Hora Fin:</strong> {{ horario.hora_fin|time:"H:i"  }}<br>
+            <a href="{% url 'cineapp:editar_horario' horario.id %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'cineapp:eliminar_horario' horario.id %}" class="btn btn-warning">Eliminar</a>
+
+        </li>
+        <hr>
+    {% empty %}
+        <li>No hay horarios disponibles para esta película.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'cineapp:agregar_horario' pelicula_id=pelicula.pk %}" class="btn btn-success">Agregar Horario</a>
+{% endblock %}

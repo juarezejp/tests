@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear/Editar Asiento - CineManager{% endblock %}
+
+{% block content %}
+    <h1>{% if asiento %}Editar{% else %}Crear{% endif %} Asiento</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="numero_asiento">Número de Asiento:</label>
+            <input type="text" id="numero_asiento" name="numero_asiento" value="{{ asiento.numero_asiento }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="disponible">Disponible:</label>
+            <input type="checkbox" id="disponible" name="disponible" {% if asiento.disponible %}checked{% endif %}>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    
+    </form>
+    <a href="{% url 'cineapp:lista_peliculas' %}" class="btn btn-secondary">Volver</a>
+
+{% endblock %}

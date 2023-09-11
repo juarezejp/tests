@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: app_prueba
+    #restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app_prueba/:/app
+
+# Comentamos el servicio de la base de datos
+# db-appprueba:
+#   image: mariadb
+#   container_name: appprueba-db
+#   #restart: always
+#   environment:
+#     MYSQL_DATABASE: appprueba
+#     MYSQL_USER: appprueba_user
+#     MYSQL_PASSWORD: "asjdghj"
+#     MYSQL_ROOT_PASSWORD: admin1234
+#   volumes:
+#     - db-appprueba:/var/lib/mysql
+#   ports:
+#     - 3320:3306
+
+# volumes:
+#   db:
+#   db-appprueba:

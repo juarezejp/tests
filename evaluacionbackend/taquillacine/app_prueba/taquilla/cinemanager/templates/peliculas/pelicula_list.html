@@ -1,0 +1,25 @@
+<!-- lista_peliculas.html -->
+{% extends 'base.html' %}
+
+{% block title %}Lista de Películas - CineManager{% endblock %}
+
+{% block content %}
+    <h1>Lista de Películas</h1>
+    
+    <ul>
+        {% for pelicula in peliculas %}
+            <li>
+                <strong>Título:</strong> {{ pelicula.titulo }}<br>
+                <strong>Clasificación:</strong> {{ pelicula.clasificacion }}<br>
+                <a href="{% url 'cineapp:detalle_pelicula' pk=pelicula.pk %}" class="btn btn-primary">Ver Detalles</a>
+                
+            </li>
+            <hr>
+        {% empty %}
+            <li>No hay películas disponibles.</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Botón para agregar películas -->
+    <a href="{% url 'cineapp:crear_pelicula' %}" class="btn btn-success">Agregar Película</a>
+{% endblock %}

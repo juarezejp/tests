@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Asientos de la Película - CineManager{% endblock %}
+
+{% block content %}
+    <h1>Asientos de la Película</h1>
+
+    <h2>Detalles de la Película:</h2>
+    <dl>
+        <dd>{{ pelicula.titulo }}</dd>
+        <strong>Clasificación:</strong>
+        <dd>{{ pelicula.clasificacion }}</dd>
+        <strong>Género:</strong>
+        <dd>{{ pelicula.genero }}</dd>
+        <strong>Director:</strong>
+        <dd>{{ pelicula.director }}</dd>
+    </dl>
+
+    <h2>Lista de Asientos:</h2>
+    <ul>
+        {% for asiento in asientos %}
+            <li>
+                Asiento {{ asiento.numero_asiento }} - {% if asiento.disponible %}Disponible{% else %}No Disponible{% endif %}
+                <a href="{% url 'cineapp:asiento_update' pelicula_id=pelicula.pk asiento_id=asiento.pk %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'cineapp:asiento_delete' pelicula_id=pelicula.pk pk=asiento.pk %}" class="btn btn-danger">Eliminar</a>
+            </li>
+        {% empty %}
+            <li>No hay asientos disponibles.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'cineapp:asiento_create' pelicula_id=pelicula.pk %}" class="btn btn-success">Agregar Asiento</a>
+    <a href="{% url 'cineapp:lista_peliculas' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}
